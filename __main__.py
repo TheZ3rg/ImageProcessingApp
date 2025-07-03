@@ -121,6 +121,8 @@ class ImageProcessingApp:
             if not ret:
                 raise Exception("Не удалось получить кадр")
             
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            
             self.image = frame
             self.display_image = self.image.copy()
             self.update_image()
