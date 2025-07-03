@@ -282,7 +282,7 @@ class ImageProcessingApp:
         save_path = filedialog.asksaveasfilename(
             title="Сохранить изображение",
             defaultextension=".png",
-            filetypes=[("PNG", "*.png"), ("JPEG", "*.jpg"), ("Все файлы", "*.*")]
+            filetypes=[("PNG", "*.png"), ("JPG", "*.jpg"), ("Все файлы", "*.*")]
         )
 
         if save_path:
