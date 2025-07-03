@@ -52,11 +52,11 @@ class ImageProcessingApp:
         top_buttons_frame_2.pack()
 
         tk.Button(top_buttons_frame_2,
-                  text="Повысить яркость",
+                  text="Изменить яркость",
                   command=self.increase_brightness,
                   font=button_font).grid(row=0, column=0, padx=5)
         tk.Button(top_buttons_frame_2,
-                  text="Повысить резкость",
+                  text="Изменить резкость",
                   command=self.sharpen_image,
                   font=button_font).grid(row=0, column=1, padx=5)
         tk.Button(top_buttons_frame_2,
