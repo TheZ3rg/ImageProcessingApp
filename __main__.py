@@ -102,7 +102,8 @@ class ImageProcessingApp:
                 self.display_image = self.image.copy()
                 self.update_image()
             except Exception as e:
-                messagebox.showerror("Ошибка", f"Невозможно загрузить изображение: {str(e)}")
+                messagebox.showerror("Ошибка",
+                                     f"Невозможно загрузить изображение: {str(e)}")
 
     def capture_from_webcam(self):
         """Получение изображение с вебкамеры."""
@@ -110,7 +111,8 @@ class ImageProcessingApp:
             cap = cv2.VideoCapture(0)
 
             if not cap.isOpened():
-                raise Exception("Не удалось подключиться к камере")
+                raise Exception("Не удалось подключиться к камере." \
+                " Проверьте доступ и попробуйте еще раз")
         
             ret, frame = cap.read()
         
@@ -139,9 +141,12 @@ class ImageProcessingApp:
             
         self.img_canvas.delete("all")
         self.img_canvas.config(width=new_size[0], height=new_size[1])
-        self.img_canvas.create_image(new_size[0]//2, new_size[1]//2, image=self.tk_image)
+        self.img_canvas.create_image(new_size[0]//2,
+                                     new_size[1]//2,
+                                     image=self.tk_image)
     
     def change_channel(self, *args):
+        """Изменяет цветовой канал отображаемого изображения"""
         channel = self.channel_var.get()
         if channel == "Оригинал":
             self.display_image = self.image.copy()
@@ -173,10 +178,13 @@ class ImageProcessingApp:
             if percent is None:
                 return
                 
-            hue, saturation, value =  cv2.split(cv2.cvtColor(self.display_image, cv2.COLOR_RGB2HSV))
+            hue, saturation, value =  cv2.split(cv2.cvtColor(self.display_image,
+                                                              cv2.COLOR_RGB2HSV))
             
             if percent >= 0: # Увеличение яркости
-                value = np.where(value * (1 + percent/100) > 255, 255, value * (1 + percent/100))
+                value = np.where(value * (1 + percent/100) > 255,
+                                  255,
+                                  value * (1 + percent/100))
             else: # Уменьшение яркости
                 value = value * (1 + percent/100)
             
@@ -219,7 +227,8 @@ class ImageProcessingApp:
             self.update_image()
 
         except Exception as e:
-            messagebox.showerror("Ошибка", f"Не удалось повысить резкость: {str(e)}")
+            messagebox.showerror("Ошибка",
+                                  f"Не удалось повысить резкость: {str(e)}")
             
     def draw_rectangle(self):
         """Рисует синий прямоугольник по координатам от пользователя"""
@@ -244,7 +253,8 @@ class ImageProcessingApp:
 
             h, w = self.display_image.shape[:2]
             if not (0 <= x1 < x2 < w and 0 <= y1 < y2 < h):
-                messagebox.showerror("Ошибка", f"Координаты вне границ изображения. Размер изображения: {h, w}")
+                messagebox.showerror("Ошибка",
+                                     f"Координаты вне границ изображения. Размер изображения: {h, w}")
                 return
 
             cv2.rectangle(
@@ -258,7 +268,8 @@ class ImageProcessingApp:
             self.update_image()
 
         except Exception as e:
-            messagebox.showerror("Ошибка", f"Не удалось нарисовать прямоугольник: {str(e)}")
+            messagebox.showerror("Ошибка",
+                                 f"Не удалось нарисовать прямоугольник: {str(e)}")
 
     def save_image(self):
         """Сохранение изображения в выбранную папку"""
